@@ -18,9 +18,30 @@ export class EmpleadosService{
         new Empleado("Maria", "Rodriguez","Administrativo",4000)
     
       ]
-    agregarEmpleadoServicio(empleado:Empleado){
+    addEmpleadoService(empleado:Empleado){
 
         this.alertService.muestraMensaje(`Nombre: ${empleado.nombre} ${empleado.apellido}\nCargo: ${empleado.cargo}\nSalario: ${empleado.salario}`)
         this.empleados.push(empleado);
+    }
+
+    findEmpleado(indice:number){
+        let empleado:Empleado = this.empleados[indice];
+
+        return empleado;
+    }
+
+    getUpdateEmpleado(indice:number, empleado:Empleado){
+
+        let empleadoModificado = this.empleados[indice]
+
+        empleadoModificado.nombre = empleado.nombre
+        empleadoModificado.apellido = empleado.apellido
+        empleadoModificado.cargo = empleado.cargo
+        empleadoModificado.salario = empleado.salario
+
+    }
+
+    getDeleteEmpleado(indice:number){
+        this.empleados.splice(indice,1)
     }
 }

@@ -1,4 +1,3 @@
-<p>actualizar works!</p>
 <div class="container">
     <div class="col">
       <h1>{{ titulo }}</h1>
@@ -16,7 +15,7 @@
           />
         </div>
   
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3 apellido">
           <label for="apellido">Apellido:</label>
           <input
             type="text"
@@ -26,8 +25,9 @@
             class="form-control"
             [(ngModel)]="cuadroApellido"
           />
+          
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3 cargo">
           <label for="cargo">Cargo:</label>
           <input
             type="text"
@@ -52,20 +52,21 @@
             <button
               type="submit"
               class="btn btn-primary"
-                  (click)="agregarEmpleado()"
+              (click)="updateEmpleado()"
               id="boton-agregar"
               [disabled]="validar()"
             >
-              Agregar
+              Actualizar
             </button>
-            <button class="btn btn-danger" (click)="volverHome()">ir a Home</button>    
+            <button class="btn btn-danger" (click)="deleteEmpleado()">Eliminar</button>    
           </div>
             
         </div>
+        <button id="home" class="btn btn-success" (click)="volverHome()">ir a Home</button>  
+
       </form>
     </div>
   </div>
-  
   <br/>
   <br/>
   

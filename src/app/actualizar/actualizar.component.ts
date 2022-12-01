@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EmpleadosService } from '../Empleados.service';
 import { Empleado } from '../Empleado.model';
 @Component({
@@ -10,15 +10,24 @@ import { Empleado } from '../Empleado.model';
 export class ActualizarComponent implements OnInit {
 
   
-  titulo:string = "Proyectos" 
+  titulo:string = "Modificar empleados" 
 
 
-  constructor(private router:Router, private servAgregarEmpleado:EmpleadosService) { 
+  constructor(private rutaActiva:ActivatedRoute,private router:Router, private servAgregarEmpleado:EmpleadosService) { 
     this.empleados = this.servAgregarEmpleado.empleados
   }
 
   ngOnInit(): void {
-  }
+    this.indice = this.rutaActiva.snapshot.params['id']
+
+    let empleado:Empleado = this.servAgregarEmpleado.findEmpleado(this.indice)
+
+    this.cuadroNombre = empleado.nombre
+    this.cuadroApellido = empleado.apellido
+    this.cuadroCargo = empleado.cargo
+    this.cuadroSalario = empleado.salario
+
+  };
 
   volverHome(){
     this.router.navigate([''])
@@ -28,6 +37,7 @@ export class ActualizarComponent implements OnInit {
   cuadroApellido:String = ""
   cuadroCargo:String = ""
   cuadroSalario:Number= 0;
+  indice:number;
 
   empleados:Empleado[] = [];
 
@@ -43,10 +53,15 @@ export class ActualizarComponent implements OnInit {
     }
   }
 
-  agregarEmpleado(){
+  updateEmpleado(){
     this.volverHome()
     let miEmpleado:Empleado = new Empleado(this.cuadroNombre,this.cuadroApellido,this.cuadroCargo,this.cuadroSalario);
-    this.servAgregarEmpleado.agregarEmpleadoServicio(miEmpleado);
+    this.servAgregarEmpleado.getUpdateEmpleado(this.indice,miEmpleado);
+  }
+
+  deleteEmpleado(){
+    this.volverHome()
+    this.servAgregarEmpleado.getDeleteEmpleado(this.indice)
   }
 
 
