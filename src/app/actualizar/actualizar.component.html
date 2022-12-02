@@ -55,10 +55,11 @@
               (click)="updateEmpleado()"
               id="boton-agregar"
               [disabled]="validar()"
+              [ngClass]="edit()"
             >
-              Actualizar
+              {{accionRealizada}}
             </button>
-            <button class="btn btn-danger" (click)="deleteEmpleado()">Eliminar</button>    
+            <!-- <button class="btn btn-danger" (click)="deleteEmpleado()">Eliminar</button>     -->
           </div>
             
         </div>
