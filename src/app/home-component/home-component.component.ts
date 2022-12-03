@@ -12,9 +12,18 @@ export class HomeComponentComponent implements OnInit {
   title = 'Listado de Empleados';
 
   constructor(private servAgregarEmpleado:EmpleadosService) { 
-    this.empleados = this.servAgregarEmpleado.empleados
+
+    // this.empleados = this.servAgregarEmpleado.empleados
   }
   ngOnInit(): void {
+    this.servAgregarEmpleado.getEmpleados().subscribe(misEmpleados =>{
+      console.log(misEmpleados);
+
+      this.empleados = Object.values(misEmpleados);
+    
+      this.servAgregarEmpleado.setEmpleados(this.empleados);
+    }); 
+
   }
   cuadroNombre:String = ""
   cuadroApellido:String = ""

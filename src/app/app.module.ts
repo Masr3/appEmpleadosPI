@@ -12,6 +12,10 @@ import { QuienessomosComponent } from './quienessomos/quienessomos.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ActualizarComponent } from './actualizar/actualizar.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DataService } from './data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes:Routes=[
   
@@ -19,8 +23,8 @@ const appRoutes:Routes=[
     {path:'proyectos', component:ProyectosComponentComponent},
     {path:'about', component:QuienessomosComponent},
     {path:'contacto', component:ContactoComponent},
-    {path:'actualizar/:id', component:ActualizarComponent}
-
+    {path:'actualizar/:id', component:ActualizarComponent},
+    {path:'**', component:NotFoundComponent}
   
 ]
 @NgModule({
@@ -33,14 +37,17 @@ const appRoutes:Routes=[
     QuienessomosComponent,
     ContactoComponent,
     ActualizarComponent,
+    NotFoundComponent,
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NoopAnimationsModule,
+    HttpClientModule
   ],
-  providers: [ServicioEmpleadosService,EmpleadosService],
+  providers: [ServicioEmpleadosService,EmpleadosService,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
